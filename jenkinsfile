@@ -1,30 +1,25 @@
-pipeline {
 
+pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'node --version'
+                bat 'npm --version'
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
     }
@@ -33,7 +28,6 @@ pipeline {
         success {
             echo 'CI Pipeline completed successfully!'
         }
-
         failure {
             echo 'CI Pipeline failed!'
         }
